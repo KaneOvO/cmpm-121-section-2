@@ -13,9 +13,11 @@ SetText("click to start!")
 
 var isJumping = false
 let gameOver = true
+let animationDuration: number = 2.5
 
 document.addEventListener('mousedown', () => jump())
 
+let birdSpeed: number = 2
 
 setInterval(function () { Main()}, 10)
 
@@ -25,10 +27,15 @@ function Main()
     {
         score = score + 1;
         SetText("Score: " + score)
+        bird!.style.animationDuration = birdSpeed.toString(); 
+        birdSpeed -= 0.1;
+        console.log(bird!.style.animationDuration)
 
         CheckGameOver()
     }
 }
+
+
 
 
 
