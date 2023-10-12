@@ -17,39 +17,21 @@ let gameOver = true
 document.addEventListener('mousedown', () => jump())
 
 
-//setInterval(function () { Main()}, 10)
+setInterval(function () { Main()}, 10)
 
-// function Main()
-// {
-//     if(gameOver == false)
-//     {
-//         score = score + 1;
-//         SetText("Score: " + score)
-
-//         CheckGameOver()
-//     }
-// }
-let previousTimeStamp: number;
-let count: number;
-function Main(timestamp: number)
+function Main()
 {
-    if (previousTimeStamp === undefined) {
-        previousTimeStamp = timestamp;
-    }
-
-    const frameUpdate = (timestamp - previousTimeStamp) / 1000;
-    count += frameUpdate;
-    if(gameOver == false || Number.isInteger(count))
+    if(gameOver == false)
     {
         score = score + 1;
         SetText("Score: " + score)
 
         CheckGameOver()
     }
-    previousTimeStamp = timestamp;
-    requestAnimationFrame(Main);
 }
-requestAnimationFrame(Main);
+
+
+
 
 
 function jump()
@@ -138,6 +120,7 @@ function StartGame()
     console.log("Game started!")
     gameOver = false
     score = 0
+    cactus?.classList.add("cactusMove")
     cactus?.classList.add("cactusMove")
     bird?.classList.add("birdMove")
 }
