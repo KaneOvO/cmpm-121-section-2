@@ -14,21 +14,42 @@ SetText("click to start!")
 var isJumping = false
 let gameOver = true
 
-document.addEventListener('click', () => jump())
+document.addEventListener('mousedown', () => jump())
 
 
-setInterval(function () { Main()}, 10)
+//setInterval(function () { Main()}, 10)
 
-function Main()
+// function Main()
+// {
+//     if(gameOver == false)
+//     {
+//         score = score + 1;
+//         SetText("Score: " + score)
+
+//         CheckGameOver()
+//     }
+// }
+let previousTimeStamp: number;
+let count: number;
+function Main(timestamp: number)
 {
-    if(gameOver == false)
+    if (previousTimeStamp === undefined) {
+        previousTimeStamp = timestamp;
+    }
+
+    const frameUpdate = (timestamp - previousTimeStamp) / 1000;
+    count += frameUpdate;
+    if(gameOver == false || Number.isInteger(count))
     {
         score = score + 1;
         SetText("Score: " + score)
 
         CheckGameOver()
     }
+    previousTimeStamp = timestamp;
+    requestAnimationFrame(Main);
 }
+requestAnimationFrame(Main);
 
 
 function jump()
@@ -45,6 +66,7 @@ function jump()
     else
     {
         StartGame();
+        
     }
     
 }
